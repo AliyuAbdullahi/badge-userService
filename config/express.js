@@ -1,10 +1,13 @@
 var express = require('express'),
     morgan = require('morgan'),
+    routes = require('../app/features/routes/userServiceRoute'),
     bodyParser = require('body-parser');
+    var router = express.Router();
     // methodOverride = require('method-override');
-
+    console.log("crap");
 module.exports = function() {
   var app = express();
+  
 
   if(process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
@@ -12,11 +15,14 @@ module.exports = function() {
 
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({
-    extended: true
+    extended: false
   }));
   // app.use(methodOverride());
+  app.use('/', router);
 
-  require('../app/features/routes/userServiceRoute')(app);
-
+  routes(router);
+   
+  //routes = require('../app/features/routes/userServiceRoute');
+  //routes(router);
   return app;
 };
