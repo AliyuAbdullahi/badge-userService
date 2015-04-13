@@ -1,7 +1,7 @@
 var express = require('express'),
     morgan = require('morgan'),
-    bodyParser = require('body-parser'),
-    methodOverride = require('method-override');
+    bodyParser = require('body-parser');
+    // methodOverride = require('method-override');
 
 module.exports = function() {
   var app = express();
@@ -14,9 +14,9 @@ module.exports = function() {
   app.use(bodyParser.urlencoded({
     extended: true
   }));
-  app.use(methodOverride());
+  // app.use(methodOverride());
 
-  require('../app/routes/userServiceRoute')(app);
+  require('../app/features/routes/userServiceRoute')(app);
 
   return app;
 };

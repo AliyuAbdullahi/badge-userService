@@ -1,11 +1,12 @@
-var postgres = require('./config/postgres')(),
-    express = require('./config/express');
+var db = require("./config/ptgres");
 
-var app = express();
 
-app.set('port', (process.env.PORT || 5000));
-
-app.listen(app.get('port'), function() {
-  console.log("server running at http://localhost:"+app.get('port'));
+//var app = express();
+var config = require('./config/env/config');
+var app = require('./config/express')(db);
+app.listen(config.port, function () {
+    console.log('Express Servicce  app listening on port: ' + config.port);
 });
 module.exports = app;
+
+

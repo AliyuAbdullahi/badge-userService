@@ -1,4 +1,4 @@
-var config = require('./config'),
+ var config = require('../config/env/config'),
     knex = require('knex');
 
 module.exports = function() {
@@ -6,9 +6,9 @@ module.exports = function() {
         client: 'pg',
         connection: config.db  
   });
-    
-    var User = require('../app/models/userModel')(db);
+    return db;
+  //   var User = require('../app/models/userModel')(db);
 
-  return User;
+  // return User;
 
 };

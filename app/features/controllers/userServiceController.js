@@ -1,4 +1,5 @@
-var User = require('../../config/postgres')()[0];
+var User = require('../../../config/ptgres')()[0];
+
 exports.createUser = function(req,res){
   new User(req.body).save().then(function(model){
     if(model){
