@@ -1,7 +1,5 @@
 var config = require('../../config/config'),
     bookshelfData = require('bookshelf');
-    
-
 module.exports = function(knex) {
   var db = bookshelfData(knex);
 

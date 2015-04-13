@@ -16,7 +16,7 @@ module.exports = function() {
   }));
   app.use(methodOverride());
 
-  require('../app/routes/user-routes')(app);
+  require('../app/routes/userServiceRoute')(app);
 
   return app;
 };
