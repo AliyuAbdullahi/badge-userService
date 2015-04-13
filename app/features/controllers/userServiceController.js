@@ -10,7 +10,7 @@ createUser : function(req,res){
   });
 },
 getAlluser : function(req,res){
-  User().fetchAll().then(function(data){
+  new User().fetchAll().then(function(data){
   if(data){
     res.json(data);
   }
