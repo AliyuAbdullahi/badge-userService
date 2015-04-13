@@ -1,4 +1,4 @@
-{
+ {
   "name": "badge-userService",
   "version": "1.0.0",
   "description": "",
@@ -9,6 +9,10 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/andela-aabdullahi/badge-userService.git"
+  },
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "export NODE_ENV=production && node_modules/jasmine-node/bin/jasmine-node  app/tests/* --autotest --color"
   },
   "author": "Aliyu Abdullahi",
   "license": "ISC",
@@ -24,6 +28,7 @@
     "knex": "^0.7.6",
     "morgan": "^1.5.2",
     "pg": "^4.3.0",
+    "pg-native": "^1.8.0",
     "request": "^2.55.0",
     "supertest": "^0.15.0"
   }
