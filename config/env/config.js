@@ -1,6 +1,7 @@
 // module.exports = require('./env/' + process.env.NODE_ENV + '.js');
 module.exports = (function () {
     return {
+        name:'user',
         db: {
             development: {
                 host: 'localhost',
