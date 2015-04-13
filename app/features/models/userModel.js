@@ -1,11 +1,12 @@
-var config = require('../../config/config'),
+  var config = require('../../../config/env/config'),
     bookshelfData = require('bookshelf');
+
 module.exports = function(knex) {
   var db = bookshelfData(knex);
 
-  db.knex.schema.hasTable(config.name).then(function(warriorExists) {
+  db.knex.schema.hasTable("users").then(function(warriorExists) {
          if(!warriorExists) {
-              db.knex.schema.createTable(config.name, function(dataTable) {
+              db.knex.schema.createTable("users", function(dataTable) {
               dataTable.increments("id").primary();
               dataTable.string('firstname');
               dataTable.string('lastname');
