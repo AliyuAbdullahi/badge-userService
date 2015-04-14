@@ -1,5 +1,6 @@
   var config = require('../../../config/env/config'),
-    bookshelfData = require('bookshelf');
+   
+      bookshelfData = require('bookshelf');
 
 module.exports = function(knex) {
   var db = bookshelfData(knex);
@@ -22,8 +23,23 @@ module.exports = function(knex) {
      });   
   var User = db.Model.extend({
     tableName: 'users',
-    hasTimestamps: true
+      hasTimestamps: true},
+    {
+        forging: function(params) {
+          params.password = params.password || "default"; 
+          // params.password = this.hashPassword(params.password);       
+        var save = this.forge(params);
+        return save;
+        },
+
+        // hashPassword: function(password) {
+        //    // var salt = new Buffer("65".toString('base64'), 'base64');
+        //    // return crypto.pbkdf2Sync(password, salt, 4096, 64).toString('base64');
+        //    return crypto(password);
+        //   }
+
   });
+
 
   return [User, db];
 };
