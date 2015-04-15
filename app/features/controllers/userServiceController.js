@@ -1,4 +1,5 @@
 var User = require('../../../config/ptgres')()[0];
+    databaseContent = require('../../../config/ptgres')()[1];
 jwt = require('jsonwebtoken'),
 
 module.exports={
@@ -37,7 +38,8 @@ Userlogin: function(req, res) {
         .then(function(data) {
             if(data) {
               console.log(data);
-                 res.json({success: "login success"}); 
+                 res.json({success: "login success",
+                  Data:data}); 
             }
             else {
                 res.json({error: "Check login info, its invalid!"});
@@ -67,14 +69,15 @@ updateOneUser:function(req,res){
 });
 },
 
+
 Usersignout : function(req, res) {
     new User({username: req.body.username})
         .fetch()
-        .then(function(model) {
-            if(model) {
-                model.set({"auth": 0});
-                res.json({ Signedout: "You will be given another token",
-                           token: model.get("auth")});
+        .then(function(data) {
+            if(data) {
+                data.set({"auth": 0});
+                res.json({ Offline: "You are now offline",
+                           token: data.get("auth")});
             }
             else {
                 res.json({error: "Enter valid user to sign out user"});
@@ -87,34 +90,35 @@ getUserByName : function(req, res){
     res.json(data);
   });
 },
+removeUser: function(req, res){
+ new User({username: req.body.username}).fetch().then(function(data){
+    if(data){
+      data.destroy().then(function(){
+        console.log("here");
+        res.json({Success: "File deleted"});
+      });
+    }
+    // res.json("User has been destroyed");
+  });
+},
 
 UserDelete : function(req, res) {
     new User({"username": req.body.username})
         .fetch()
-        .then(function(model) {
-            if(model) {
-                db.knex('users')
+        .then(function(data) {
+            if(data) {
+                databaseContent.knex('users')
                   .where("username", req.body.username)
                   .del().then(function() {
-                      res.json({success: "The account is deleted"});
+                      res.json({success: "Delete success"});
                   });
             }
             else {
-                res.json({error: "The user does not exists"});
+                res.json({error: "Unidentified User"});
             }
         });
 },
 
-removeUser: function(req, res){
- new User({username: req.body.username}).fetch().then(function(data){
-    if(data){
-      data.destroy().save().then(function(){
-        res.json({Success: "File deleted"});
-      });
-    }
-    res.json("User has been destroyed");
-  });
-},
 
 putUser: function(req, res){
     User().set(req.params.body);
