@@ -26,20 +26,10 @@ module.exports = function(knex) {
       hasTimestamps: true},
     {
         forging: function(params) {
-          params.password = params.password || "default"; 
-          // params.password = this.hashPassword(params.password);       
+          params.password = params.password || "default";       
         var save = this.forge(params);
         return save;
         },
-
-        // hashPassword: function(password) {
-        //    // var salt = new Buffer("65".toString('base64'), 'base64');
-        //    // return crypto.pbkdf2Sync(password, salt, 4096, 64).toString('base64');
-        //    return crypto(password);
-        //   }
-
   });
-
-
   return [User, db];
 };
