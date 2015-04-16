@@ -22,11 +22,11 @@ module.exports = function () {
                 }
             },
             production: {
-                host:'ec2-54-197-241-64.compute-1.amazonaws.com',
-                database:'dctjbkild2gpe3',
-                user:'vqjcwsatcelafk',
+                host:'ec2-54-235-80-55.compute-1.amazonaws.com',
+                database:'d26mmsu5qgsn5u',
+                user:'duazjzqaumwqvu',
                 port:'5432',
-                password:'PDPpqOWfxrimRf3G9e5ybTREHk'
+                password:'duazjzqaumwqvu'
             },
         secret: '@I651nyI#',
         port: process.env.PORT || 4000
