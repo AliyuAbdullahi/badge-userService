@@ -19,18 +19,15 @@ var service = require('../../server');
            console.log("Data good and saved");
            done();
         });
-
-       
-  });
-
+     });
   afterEach(function(done) {
     database.knex('users')
       .where('firstname', 'Aliyu')
       .del().then(function() {
           console.log("User is out");
-      });
+        });
       done();
-  });
+    });
 
   describe("signup test", function() {
     it("should create user on post request", function(done) {
@@ -53,7 +50,7 @@ var service = require('../../server');
                       Success: "Signed successfully"}));
                     done();
                 });
-    });
+              });
     it("Should have a token on signup", function(done) {
       server("http://localhost:4000/").post('users/signup')
                 .send({
@@ -73,8 +70,8 @@ var service = require('../../server');
                     expect(res.body).toBeDefined();
                       
                     done();
-                });
-    });
+              });
+            });
     it("should create user on post request", function(done) {
       server("http://localhost:4000/").post('users/signup')
                 .send({
@@ -95,9 +92,8 @@ var service = require('../../server');
                       error: "You need to Register by filling the field"}));
                     done();
                 });
-    });
-
-    });
+              });
+            });
 describe("Test for user login ",function(){
   it("should log success if user logs in well", function(done){
     server("http://localhost:4000/").post('users/login')
@@ -116,8 +112,7 @@ describe("Test for user login ",function(){
                     }));
                     done();
                   });
-
-});
+                });
   it("should throw error when the username or password is invalid",function(done){
     server("http://localhost:4000/").post('users/login')
           .send({
@@ -135,11 +130,41 @@ describe("Test for user login ",function(){
                     }));
                     done();
                   });
+                });
+              });
+describe("Logout test",function(){
+  it("should log user out when logout is selected",function(done){
+    server("http://localhost:4000/").post('users/signout')
+      .send({
+            username:"aliyuabdullahi",
+            password:"aliyuabdullahi"
+          }).set('Accept','application/json')
+            .expect('Content-Type',/json/)
+            .expect(200)
+            .end(function(err,res){
+                if(err){
+                     console.log(err);
+            }
+  expect(res.body).toEqual(jasmine.objectContaining({Offline: "You are now offline"}));
+  done();
+});
+});
+  it("should log error if logout is not successful",function(){
+    server("http://localhost:4000/").post('users/signout')
+      .send({
+            username:"aliyuabdu",
+            password:"aliyuabdullahi"
+          }).set('Accept','application/json')
+            .expect('Content-Type',/json/)
+            .expect(200)
+            .end(function(err,res){
+                if(err){
+                     console.log(err);
+            }
+  expect(res.body).toEqual(jasmine.objectContaining({error: "Enter valid user to sign out user"}));
+              done();
+          });
+
+        });   
+     });
   });
-
-
-});
-
-
-    
-});
