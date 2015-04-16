@@ -17,10 +17,9 @@ UserSignUp : function(req,res){
                 username: req.body.username,
                 password: req.body.password,
                 is_admin: false,
-                auth: token
+                auth: '4444'
             }).save().then(function(data) {
-                   res.json({data: data,
-                    Success:"Signed successfully"});
+                   res.json({Success:"Signed successfully"});
                    
                 });      
 
@@ -38,8 +37,7 @@ Userlogin: function(req, res) {
         .then(function(data) {
             if(data) {
               console.log(data);
-                 res.json({success: "login success",
-                  Data:data}); 
+                 res.json({success: "login success"}); 
             }
             else {
                 res.json({error: "Check login info, its invalid!"});
@@ -98,7 +96,7 @@ removeUser: function(req, res){
         res.json({Success: "File deleted"});
       });
     }
-    // res.json("User has been destroyed");
+  
   });
 },
 
