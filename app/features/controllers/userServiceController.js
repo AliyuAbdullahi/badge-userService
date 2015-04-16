@@ -75,7 +75,7 @@ Usersignout : function(req, res) {
             if(data) {
                 data.set({"auth": 0});
                 res.json({ Offline: "You are now offline",
-                           token: data.get("auth")});
+                           });
             }
             else {
                 res.json({error: "Enter valid user to sign out user"});
