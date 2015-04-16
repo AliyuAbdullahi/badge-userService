@@ -21,15 +21,13 @@ module.exports = function () {
                     database: 'mydb'
                 }
             },
-            // production: {
-            //     uri: 'mongodb://badge-provider:allahumasedika12@ds045757.mongolab.com:45757/badge-provider',
-            //     options: {
-            //         user: '',
-            //         pass: ''
-            //     }
-            // }
-        // },
-
+            production: {
+                host:'ec2-54-197-241-64.compute-1.amazonaws.com',
+                database:'dctjbkild2gpe3',
+                user:'vqjcwsatcelafk',
+                port:'5432',
+                password:'PDPpqOWfxrimRf3G9e5ybTREHk'
+            },
         secret: '@I651nyI#',
         port: process.env.PORT || 4000
     };

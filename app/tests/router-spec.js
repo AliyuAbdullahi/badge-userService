@@ -99,7 +99,7 @@ describe("Test for user login ",function(){
     server("http://localhost:4000/").post('users/login')
           .send({
             username:"aliyuabdullahi",
-           password:"aliyuabdullahi"
+            password:"aliyuabdullahi"
           }).set('Accept', 'application/json')
                 .expect('Content-Type', /json/)
                 .expect(200)
@@ -117,7 +117,7 @@ describe("Test for user login ",function(){
     server("http://localhost:4000/").post('users/login')
           .send({
             username:"ali",
-           password:"aliyuabdullahi"
+            password:"aliyuabdullahi"
           }).set('Accept', 'application/json')
                 .expect('Content-Type', /json/)
                 .expect(200)
@@ -167,4 +167,21 @@ describe("Logout test",function(){
 
         });   
      });
+// describe("Delete user test",function(){
+//   it("should delete the user specified when called",function(done){
+//     server("http://localhost:4000/").delete('users/delete')
+//       .send({
+//             username:"aliyuabdullahi"
+//           }).set('Accept','application/json')
+//             .expect('Content-Type',/json/)
+//             .expect(200)
+//             .end(function(err,res){
+//                 if(err){
+//                      console.log(err);
+//             }
+//             expect(res.body).toEqual(jasmine.objectContaining({success: "Delete success"}));
+//               done();
+//           });
+//   });
+// });
   });
