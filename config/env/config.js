@@ -26,7 +26,7 @@ module.exports = function () {
                 database:'d26mmsu5qgsn5u',
                 user:'duazjzqaumwqvu',
                 port:'5432',
-                password:'duazjzqaumwqvu'
+                password:'uAdCeiursAYjhnNsr39d88oTHZ'
             },
         secret: '@I651nyI#',
         port: process.env.PORT || 4000
