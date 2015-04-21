@@ -28,7 +28,6 @@ module.exports = function () {
                 port:'5432',
                 password:'uAdCeiursAYjhnNsr39d88oTHZ'
             },
-        secret: '@I651nyI#',
         port: process.env.PORT || 4000
     };
 };
