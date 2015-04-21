@@ -5,6 +5,11 @@ jwt = require('jsonwebtoken'),
 module.exports={
 UserSignUp : function(req,res){
   if(req.body.username && req.body.password){
+    new User({'username': req.body.username}).fetch().then(function(data){
+      if(data){
+    res.json({Error:"User already exit Enter a different user name"});
+    }
+    else{
      var userInfo = {
                 username: req.body.username,
                 password:req.body.password
@@ -17,19 +22,17 @@ UserSignUp : function(req,res){
                 username: req.body.username,
                 password: req.body.password,
                 is_admin: false,
-                auth: '4444'
+                auth: token
             }).save().then(function(data) {
-                   res.json({Success:"Signed successfully"});
-                   
+                   res.json({Success:"Signed successfully"});    
                 });      
-
   }
-  else
-  {
-     res.json({error: "You need to Register by filling the field"});
-  }
+  });
+} 
+else{
+  res.json("Enter a valid username and password to signup");
+}
 },
-
 Userlogin: function(req, res) {
     new User({"username": req.body.username,
               "password": req.body.password})
@@ -37,7 +40,8 @@ Userlogin: function(req, res) {
         .then(function(data) {
             if(data) {
               console.log(data);
-                 res.json({success: "login success"}); 
+                 res.json({success: "login success",
+                 token: data.attributes.auth}); 
             }
             else {
                 res.json({error: "Check login info, its invalid!"});
@@ -67,7 +71,6 @@ updateOneUser:function(req,res){
 });
 },
 
-
 Usersignout : function(req, res) {
     new User({username: req.body.username})
         .fetch()
@@ -88,6 +91,7 @@ getUserByName : function(req, res){
     res.json(data);
   });
 },
+
 removeUser: function(req, res){
  new User({username: req.body.username}).fetch().then(function(data){
     if(data){
@@ -116,7 +120,6 @@ UserDelete : function(req, res) {
             }
         });
 },
-
 
 putUser: function(req, res){
     User().set(req.params.body);
