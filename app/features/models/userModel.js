@@ -17,7 +17,7 @@ module.exports = function(knex) {
               dataTable.string('auth');
               dataTable.timestamps();
             }).then(function() {
-              console.log("created");
+              console.log("Table now created");
             });
          }
      });   
