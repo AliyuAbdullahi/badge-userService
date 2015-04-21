@@ -7,5 +7,4 @@ module.exports = function(app) {
   app.route('/users/edit').put(controllerData.updateOneUser);
   app.route('/users/delete').delete(controllerData.UserDelete);
   // app.route('users/delete').delete(controllerData.UserDelete);
-
 };  
