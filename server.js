@@ -1,6 +1,4 @@
 var db = require("./config/ptgres")();
-
-
 //var app = express();
 var config = require('./config/env/config')();
 var app = require('./config/express')();
