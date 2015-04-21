@@ -5,7 +5,7 @@
 module.exports = function() {
   var db = knex({
         client: 'pg',
-        connection: config.production 
+        connection: config.db.connection
   });
    var badgeData = badge(db); 
   //   var User = require('../app/models/userModel')(db);
