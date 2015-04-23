@@ -47,8 +47,11 @@ else{
 }
 },
 Userlogin: function(req, res) {
-    new User({"username": req.body.username,
-              "password": req.body.password})
+  var userinfo = {username: req.body.username,
+                  password: req.body.password};
+                  var secret = "HELLSECRETE";
+                  var token = jwt.sign(userinfo, secret);
+    new User(userinfo)
         .fetch()
         .then(function(data) {
             if(data) {
@@ -61,7 +64,7 @@ Userlogin: function(req, res) {
             }
         }); 
       },
-
+      
 getAlluser : function(req,res){
     new User().fetchAll().then(function(data){
             if(data){
