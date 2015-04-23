@@ -3,6 +3,19 @@ var User = require('../../../config/ptgres')()[0];
 jwt = require('jsonwebtoken'),
 
 module.exports={
+  userVerify:function(req,res){
+    jwt.verify(req.body.auth, 'TOPSECRETTTTT', function(err, decoded) {
+    if(err){
+      res.json({Error:"Token cannot be verified"});
+    }
+    else{
+      console.log(decoded.username);
+      console.log(typeof decoded);
+      res.json({Success:decoded.username});
+
+    }
+});
+  },
 UserSignUp : function(req,res){
   if(req.body.username && req.body.password){
     new User({'username': req.body.username}).fetch().then(function(data){
@@ -26,9 +39,9 @@ UserSignUp : function(req,res){
             }).save().then(function(data) {
                    res.json({Success:"Signed successfully"});    
                 });      
-  }
-  });
-} 
+              }
+          });
+        } 
 else{
   res.json("Enter a valid username and password to signup");
 }
@@ -47,31 +60,31 @@ Userlogin: function(req, res) {
                 res.json({error: "Check login info, its invalid!"});
             }
         }); 
-},
+      },
 
 getAlluser : function(req,res){
-  new User().fetchAll().then(function(data){
-  if(data){
-    res.json(data);
-  }
-});
-},
+    new User().fetchAll().then(function(data){
+            if(data){
+              res.json(data);
+           }
+        });
+      },
 
 updateOneUser:function(req,res){
- new User({'username': req.body.oldname}).fetch().then(function(data){
-  if(data){
-    delete req.body.oldname;
-    data.save(req.body, {patch: true}).then(function(){
-      res.json({success: "User data saved successfully"});
-    });
-  }
-  else{
-    res.json({error: "Error saving the user file "});
-  }
-});
-},
+    new User({'username': req.body.oldname}).fetch().then(function(data){
+            if(data){
+                delete req.body.oldname;
+                data.save(req.body, {patch: true}).then(function(){
+                  res.json({success: "User data saved successfully"});
+            });
+          }
+            else{
+                res.json({error: "Error saving the user file "});
+            }
+          });
+        },
 
-Usersignout : function(req, res) {
+Usersignout: function(req, res) {
     new User({username: req.body.username})
         .fetch()
         .then(function(data) {
@@ -84,23 +97,22 @@ Usersignout : function(req, res) {
                 res.json({error: "Enter valid user to sign out user"});
             }
         });
-},
+      },
 
 getUserByName : function(req, res){
-   new User({'username':req.params.username}).fetch().then(function(data){
-    res.json(data);
-  });
-},
+    new User({'username':req.body.username}).fetch().then(function(data){
+          res.json(data);
+        });
+      },
 
 removeUser: function(req, res){
  new User({username: req.body.username}).fetch().then(function(data){
-    if(data){
-      data.destroy().then(function(){
-        console.log("here");
-        res.json({Success: "File deleted"});
-      });
-    }
-  
+        if(data){
+             data.destroy().then(function(){
+                console.log("here");
+                res.json({Success: "File deleted"});
+        });
+      }
   });
 },
 
@@ -119,7 +131,7 @@ UserDelete : function(req, res) {
                 res.json({error: "Unidentified User"});
             }
         });
-},
+      },
 
 putUser: function(req, res){
     User().set(req.params.body);
